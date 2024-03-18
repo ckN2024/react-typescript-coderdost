@@ -1,11 +1,14 @@
 import './add-note.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NoteType, Priority } from '../note/note-type';
 import { v4 as uuidv4 } from 'uuid';
 import Card from '../card/Card';
 
 type AddNoteProps = {
   addNote: (note: NoteType) => void;
+  editMode: boolean;
+  noteToBeEdited: NoteType | null;
+  updateNote: (updatedNote: NoteType) => void;
 }
 
 function AddNote(props: AddNoteProps) {
@@ -17,13 +20,32 @@ function AddNote(props: AddNoteProps) {
     setText(e.target.value);
   }
 
+  const setNoteContent = (note: NoteType) => {
+    setText(note.text);
+    setPriority(note.priority); 
+  }
+
+  useEffect(()=>{
+    if(props.noteToBeEdited && props.editMode) {
+      setNoteContent(props.noteToBeEdited);
+    }
+  }, [props.noteToBeEdited, props.editMode])
+
   const handleClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    props.addNote({
-      text,
-      priority,
-      id: uuidv4(),
-    });
+    if(props.editMode) {
+      props.noteToBeEdited && props.updateNote({
+        text,
+        priority,
+        id: props.noteToBeEdited.id
+      })
+    } else {
+      props.addNote({
+        text,
+        priority,
+        id: uuidv4(),
+      });
+    }
     setText("");
     setPriority('low');
   }
@@ -45,7 +67,7 @@ function AddNote(props: AddNoteProps) {
           <option value="medium">Medium</option>
           <option value="low">Low</option>
         </select>
-        <button onClick={handleClick}>Add</button>
+        <button onClick={handleClick}>{props.editMode ? 'Edit' : 'Add'}</button>
       </form> 
     </Card>
   )

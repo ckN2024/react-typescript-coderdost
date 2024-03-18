@@ -1,6 +1,15 @@
 import "./note.css"
-import {NoteProps, Color} from './note-type'
+import {Color, Priority} from './note-type'
 import Card from "../card/Card"
+import { FaTrash, FaEdit} from 'react-icons/fa'
+
+type NoteProps = {
+  id: string;
+  text: string;
+  priority: Priority;
+  editNote: (id:string) => void;
+  deleteNote: (id: string) => void;
+}
 
 function Note(props: NoteProps) {
   return (
@@ -9,9 +18,15 @@ function Note(props: NoteProps) {
       height='2'
       padding='1'
     >
-      <div>
-        {props.text}
-      </div>
+      <>
+        <div>
+          {props.text}
+        </div>
+        <div className='right-corner'>
+          <FaEdit onClick={() => props.editNote(props.id)} />
+          <FaTrash onClick={() => props.deleteNote(props.id)} />
+        </div>
+      </>
     </Card>
     
   )
