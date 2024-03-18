@@ -2,6 +2,7 @@ import './add-note.css'
 import { useState } from 'react';
 import { NoteType, Priority } from '../note/note-type';
 import { v4 as uuidv4 } from 'uuid';
+import Card from '../card/Card';
 
 type AddNoteProps = {
   addNote: (note: NoteType) => void;
@@ -32,7 +33,11 @@ function AddNote(props: AddNoteProps) {
   }
 
   return (
-    <div>
+    <Card
+      bgColor='#333'
+      height='2'
+      padding='1'
+    >
       <form className="add-note">
         <input type="text" onChange={handleChange} value={text} />
         <select onChange={handleSelect} value={priority}>
@@ -42,7 +47,7 @@ function AddNote(props: AddNoteProps) {
         </select>
         <button onClick={handleClick}>Add</button>
       </form> 
-    </div>
+    </Card>
   )
 }
 
