@@ -1,0 +1,29 @@
+{
+  "notes": [
+    {
+      "text": "This is note 1 from DB updated",
+      "priority": "high",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "text": "This is note 2 from DB",
+      "priority": "medium"
+    },
+    {
+      "id": "3",
+      "text": "This is note 3 from DB",
+      "priority": "low"
+    },
+    {
+      "id": "4",
+      "text": "This is note 4 from DB",
+      "priority": "medium"
+    },
+    {
+      "id": "5",
+      "text": "This is note 5 from DB",
+      "priority": "low"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import Card from '../card/Card';
 import { ThemeContext } from '../../context/theme/theme';
 import { StateContext } from '../../context/state/state';
 import { ADD_NOTE, SET_EDIT_MODE, UPDATE_NOTE } from '../../actions';
+import { addNotes, updateNotes } from '../../services/notes-service';
 
 
 function AddNote() {
@@ -16,11 +17,13 @@ function AddNote() {
 
   const {state, dispatch} = useContext(StateContext)
 
-  const addNote = (note: NoteType) => {
+  const addNote = async (note: NoteType) => {
+    await addNotes(note);
     dispatch({ type: ADD_NOTE, payload: note });
   };
   
   const updateNote = (updatedNote: NoteType) => {
+    updateNotes(updatedNote.id, updatedNote);
     dispatch({ type: UPDATE_NOTE, payload: updatedNote });
     dispatch({ type: SET_EDIT_MODE, payload: false });
   };

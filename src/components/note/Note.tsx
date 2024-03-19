@@ -6,6 +6,7 @@ import { useContext } from "react"
 import { ThemeContext } from "../../context/theme/theme"
 import { StateContext } from "../../context/state/state"
 import { DELETE_NOTE, SET_EDIT_MODE, SET_NOTE_FOR_EDIT } from "../../actions"
+import { deleteNotes } from "../../services/notes-service"
 
 type NoteProps = {
   id: string;
@@ -22,7 +23,8 @@ function Note(props: NoteProps) {
     dispatch({ type: SET_NOTE_FOR_EDIT, payload: note });
   };
 
-  const deleteNote = (id: string) => {
+  const deleteNote = async (id: string) => {
+    await deleteNotes(props.id)
     dispatch({ type: DELETE_NOTE, payload: id });
   };
 

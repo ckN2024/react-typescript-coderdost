@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeContext } from './context/theme/theme';
 import Home from './pages/home/Home';
 import Switch from "react-switch";
@@ -7,7 +7,8 @@ import { NoteType } from './components/note/note-type';
 import { useReducer } from 'react';
 import { StateContext } from './context/state/state';
 import { Notes } from './components/note/data';
-import { ADD_NOTE, DELETE_NOTE, SET_EDIT_MODE, SET_NOTE_FOR_EDIT, UPDATE_NOTE } from './actions';
+import { ADD_NOTE, DELETE_NOTE, INIT_NOTES, SET_EDIT_MODE, SET_NOTE_FOR_EDIT, UPDATE_NOTE } from './actions';
+import { getNotes } from './services/notes-service';
 
 type StateType = {
   notes:NoteType[],
@@ -21,6 +22,9 @@ function App() {
 
   const [state, dispatch] = useReducer((state: StateType, action: {type:string, payload:any})=>{
     switch(action.type) {
+      case INIT_NOTES :
+        return {...state, notes: action.payload}
+
       case SET_EDIT_MODE : 
         return {...state, editMode: action.payload}
 
@@ -43,7 +47,7 @@ function App() {
       default:
         return state;
     }
-  }, {notes: Notes , editMode: false, noteToBeEdited: null})
+  }, {notes: [] , editMode: false, noteToBeEdited: null})
 
   const changeHandler = (check:boolean) => {
     setChecked(!checked);
@@ -55,6 +59,15 @@ function App() {
     }
       
   }
+
+  useEffect(()=>{
+    async function initializeNotes() {
+      const notes = await getNotes()
+      dispatch({type: INIT_NOTES, payload: notes})
+    }
+
+    initializeNotes();
+  }, [])
 
   return (
     <StateContext.Provider value={{state, dispatch}}>
