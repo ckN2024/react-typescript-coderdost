@@ -28,7 +28,7 @@ function AddNote() {
     dispatch({ type: SET_EDIT_MODE, payload: false });
   };
 
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   }
 
@@ -77,7 +77,8 @@ function AddNote() {
       padding='1'
     >
       <form className="add-note">
-        <input type="text" onChange={handleChange} value={text} />
+        {/* <input type="text" onChange={handleChange} value={text} /> */}
+        <textarea onChange={handleChange} value={text}></textarea>
         <select onChange={handleSelect} value={priority}>
           <option value="high">High</option>
           <option value="medium">Medium</option>

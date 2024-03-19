@@ -11,7 +11,7 @@ function Home() {
   const { state, dispatch } = useContext(StateContext);
 
   return (
-    <ThemeContext.Provider value={theme}>
+    // <ThemeContext.Provider value={theme}>
       <div className={`home ${theme}`}>
         <h2>Notes App ({state.notes.length} state.notes)</h2>
         <AddNote />
@@ -23,11 +23,12 @@ function Home() {
               text={note.text}
               priority={note.priority}
               note={note}
+              height= "3"
             ></Note>
           ))}
         </div>
       </div>
-    </ThemeContext.Provider>
+    // </ThemeContext.Provider>
   );
 }
 

@@ -8,6 +8,24 @@ import { useReducer } from 'react';
 import { StateContext } from './context/state/state';
 import { ADD_NOTE, DELETE_NOTE, INIT_NOTES, SET_EDIT_MODE, SET_NOTE_FOR_EDIT, UPDATE_NOTE } from './actions';
 import { getNotes } from './services/notes-service';
+import DetailedNote from './pages/detailed-note/DetailedNote';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home></Home>
+  },
+  {
+    path: "/:id",
+    element: <DetailedNote></DetailedNote>,
+  },
+]);
 
 type StateType = {
   notes:NoteType[],
@@ -16,8 +34,17 @@ type StateType = {
 }
 
 function App() {
-  const [theme, setTheme] = useState('dark');
-  const [checked, setChecked] = useState(false);
+  let defaultTheme;
+
+  // dark theme auto detection
+  if(window.matchMedia && window.matchMedia('prefers-color-scheme: dark').matches) {
+    defaultTheme = 'dark'
+  } else {
+    defaultTheme = 'light'
+  }
+
+  const [theme, setTheme] = useState(defaultTheme);
+  const [checked, setChecked] = useState(defaultTheme === 'dark');
 
   const [state, dispatch] = useReducer((state: StateType, action: {type:string, payload:any})=>{
     switch(action.type) {
@@ -48,17 +75,20 @@ function App() {
     }
   }, {notes: [] , editMode: false, noteToBeEdited: null})
 
-  const changeHandler = (check:boolean) => {
-    setChecked(!checked);
+  const checkForTheme = (check:boolean) => {
     if(check) {
       setTheme('dark');
-
+  
     } else {
       setTheme('light');
     }
-      
   }
 
+  const changeHandler = (check:boolean) => {
+    setChecked(!checked); 
+    checkForTheme(check) 
+  }
+  
   useEffect(()=>{
     async function initializeNotes() {
       const notes = await getNotes()
@@ -66,6 +96,7 @@ function App() {
     }
 
     initializeNotes();
+    checkForTheme(checked);
   }, [state.notes])
 
   return (
@@ -78,7 +109,7 @@ function App() {
           onColor="#ddd"
           offColor="#333"
         ></Switch>
-        <Home></Home>
+        <RouterProvider router={router} />
       </ThemeContext.Provider>
     </StateContext.Provider>
     

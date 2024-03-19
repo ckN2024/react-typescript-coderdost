@@ -25,3 +25,17 @@
     right: 0;
     padding: 0.5rem;
 }
+
+.text {
+    white-space: pre-wrap;
+}
+
+.text-hide {
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
