@@ -6,6 +6,8 @@ export type NoteType = {
   id: string;
   text: string;
   priority: Priority;
+  createdAt: Date,
+  updatedAt: Date,
 }
 
 // enum

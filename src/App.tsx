@@ -6,7 +6,6 @@ import Switch from "react-switch";
 import { NoteType } from './components/note/note-type';
 import { useReducer } from 'react';
 import { StateContext } from './context/state/state';
-import { Notes } from './components/note/data';
 import { ADD_NOTE, DELETE_NOTE, INIT_NOTES, SET_EDIT_MODE, SET_NOTE_FOR_EDIT, UPDATE_NOTE } from './actions';
 import { getNotes } from './services/notes-service';
 
@@ -67,7 +66,7 @@ function App() {
     }
 
     initializeNotes();
-  }, [])
+  }, [state.notes])
 
   return (
     <StateContext.Provider value={{state, dispatch}}>

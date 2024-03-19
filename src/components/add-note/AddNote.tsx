@@ -49,13 +49,17 @@ function AddNote() {
       state.noteToBeEdited && updateNote({
         text,
         priority,
-        id: state.noteToBeEdited.id
+        id: state.noteToBeEdited.id,
+        createdAt: state.noteToBeEdited.createdAt,
+        updatedAt: new Date(),
       })
     } else {
       addNote({
         text,
         priority,
         id: uuidv4(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
     }
     setText("");

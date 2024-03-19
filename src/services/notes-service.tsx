@@ -1,7 +1,7 @@
 import { NoteType } from "../components/note/note-type";
 
 export async function getNotes() {
-    const response = await fetch('/notes')
+    const response = await fetch('/notes?_sort=updatedAt&_order=desc')
     const notes = await response.json();
     return notes;
 }

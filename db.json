@@ -1,29 +1,25 @@
 {
   "notes": [
     {
-      "text": "This is note 1 from DB updated",
+      "text": "note 1",
+      "priority": "medium",
+      "id": "06dcfa88-d03d-419a-ad3f-50c65fef46af",
+      "createdAt": "2024-03-19T09:46:31.843Z",
+      "updatedAt": "2024-03-19T09:46:49.615Z"
+    },
+    {
+      "text": "note 2",
+      "priority": "medium",
+      "id": "3eba3990-9a32-4a73-9251-e8fab1b29ce7",
+      "createdAt": "2024-03-19T09:46:37.229Z",
+      "updatedAt": "2024-03-19T09:49:37.590Z"
+    },
+    {
+      "text": "note 3",
       "priority": "high",
-      "id": "1"
-    },
-    {
-      "id": "2",
-      "text": "This is note 2 from DB",
-      "priority": "medium"
-    },
-    {
-      "id": "3",
-      "text": "This is note 3 from DB",
-      "priority": "low"
-    },
-    {
-      "id": "4",
-      "text": "This is note 4 from DB",
-      "priority": "medium"
-    },
-    {
-      "id": "5",
-      "text": "This is note 5 from DB",
-      "priority": "low"
+      "id": "4045b02e-7b61-4a83-9c29-0e8300582e60",
+      "createdAt": "2024-03-19T09:46:42.605Z",
+      "updatedAt": "2024-03-19T09:48:16.508Z"
     }
   ]
 }
